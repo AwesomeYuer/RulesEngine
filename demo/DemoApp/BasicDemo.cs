@@ -14,18 +14,22 @@ namespace DemoApp
         public void Run()
         {
             Console.WriteLine($"Running {nameof(BasicDemo)}....");
-            List<Workflow> workflows = new List<Workflow>();
-            Workflow workflow = new Workflow();
-            workflow.WorkflowName = "Test Workflow Rule 1";
+            List<Workflow> workflows = new ();
+            Workflow workflow = new()
+            {
+                WorkflowName = "Test Workflow Rule 1"
+            };
 
-            List<Rule> rules = new List<Rule>();
+            List<Rule> rules = new ();
 
-            Rule rule = new Rule();
-            rule.RuleName = "Test Rule";
-            rule.SuccessEvent = "Count is within tolerance.";
-            rule.ErrorMessage = "Over expected.";
-            rule.Expression = "count < 3";
-            rule.RuleExpressionType = RuleExpressionType.LambdaExpression;
+            Rule rule = new()
+            {
+                RuleName = "Test Rule",
+                SuccessEvent = "Count is within tolerance.",
+                ErrorMessage = "Over expected.",
+                Expression = "count < 3",
+                RuleExpressionType = RuleExpressionType.LambdaExpression
+            };
 
             rules.Add(rule);
 
@@ -42,9 +46,9 @@ namespace DemoApp
                     datas
               };
 
-            List<RuleResultTree> resultList = bre.ExecuteAllRulesAsync("Test Workflow Rule 1", inputs).Result;
+            var resultList = bre.ExecuteAllRulesAsync("Test Workflow Rule 1", inputs).Result;
 
-            bool outcome = false;
+            var outcome = false;
 
             //Different ways to show test results:
             outcome = resultList.TrueForAll(r => r.IsSuccess);

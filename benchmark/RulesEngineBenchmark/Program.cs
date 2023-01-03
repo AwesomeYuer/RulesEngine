@@ -2,6 +2,7 @@
 //  Licensed under the MIT License.
 
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
 using Newtonsoft.Json;
 using RulesEngine.Models;
@@ -27,6 +28,16 @@ namespace RulesEngineBenchmark
 
         public REBenchmark()
         {
+            //BenchmarkRunner
+            //.Run<REBenchmark>(
+            //    ManualConfig
+            //        .Create(DefaultConfig.Instance)
+            //        .WithOptions(ConfigOptions.JoinSummary)
+            //        .WithOptions(ConfigOptions.DisableLogFile)
+            //        // or
+            //        .WithOptions(ConfigOptions.JoinSummary | ConfigOptions.DisableLogFile | ConfigOptions.DisableOptimizationsValidator));
+
+
             var files = Directory.GetFiles(Directory.GetCurrentDirectory(), "NestedInputDemo.json", SearchOption.AllDirectories);
             if (files == null || files.Length == 0)
             {
